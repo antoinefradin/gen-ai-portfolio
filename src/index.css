@@ -36,3 +36,16 @@ body {
   font-family: "Geist Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Site-wide selection + cursor — colors match the neobrutalist blog
+   palette (docs/blog-post-design.md: yellow #FFE135, black borders). */
+::selection {
+  background: #ffe135;
+  color: #1a1a1a;
+}
+
+@media (pointer: fine) {
+  * {
+    cursor: none !important;
+  }
+}

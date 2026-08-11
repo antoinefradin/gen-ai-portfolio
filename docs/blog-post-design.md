@@ -67,6 +67,19 @@ Each post is plain data (see `src/data/posts.js`) — `slug`, `title`, `date`,
 `BlogPost.jsx` renders `sections` in order; `BlogIndex.jsx` renders a card per
 post using the same tokens (border, flat shadow, mono meta) at a smaller scale.
 
+## Site-wide cursor & selection
+
+Applied globally in `src/index.css` / `CustomCursor.jsx`, not just on blog
+pages — these tie the neobrutalist palette into the rest of the site:
+
+- Text selection: `background: #FFE135` (the same yellow accent as tags),
+  `color: #1a1a1a`.
+- Pointer: native cursor hidden (`cursor: none` on fine-pointer devices only —
+  touch devices are left alone), replaced by a 20px circle, `background:
+  #3b82f6`, `border: 3px solid #1a1a1a`, following the mouse via a single
+  `fixed`, `pointer-events-none` div (`CustomCursor.jsx`) mounted once in
+  `App.jsx` so it persists across routes.
+
 ## Where posts live
 
 - `/blog` — index/listing (`BlogIndex.jsx`).
