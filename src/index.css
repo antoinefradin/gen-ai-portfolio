@@ -51,3 +51,14 @@ body {
     cursor: none !important;
   }
 }
+
+/* Click feedback for CursorToggle.jsx — a quick blue flash of the button's
+   own background, not the dot's color, so it reads as button feedback. */
+@keyframes cursorToggleFlash {
+  0% {
+    background-color: #3b82f6;
+  }
+  100% {
+    background-color: #fff;
+  }
+}

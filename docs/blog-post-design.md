@@ -78,7 +78,14 @@ pages — these tie the neobrutalist palette into the rest of the site:
   touch devices are left alone), replaced by a 20px circle, `background:
   #3b82f6`, `border: 3px solid #1a1a1a`, following the mouse via a single
   `fixed`, `pointer-events-none` div (`CustomCursor.jsx`) mounted once in
-  `App.jsx` so it persists across routes.
+  `App.jsx` so it persists across routes. Its `z-index` (100000) sits above
+  everything, including `CursorToggle`'s button (10000), so the dot stays
+  visible over UI — `pointer-events-none` still lets clicks fall through to
+  whatever's underneath it.
+- `CursorToggle.jsx` (top-right on blog pages): a small fixed-width button
+  (so "On" ↔ "Off" doesn't reflow it) showing just the state word plus a mini
+  replica of the dot; clicking it flashes the button's own background blue
+  (`cursorToggleFlash` keyframe in `index.css`) as press feedback.
 
 ## Where posts live
 
