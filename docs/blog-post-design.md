@@ -67,21 +67,28 @@ Each post is plain data (see `src/data/posts.js`) — `slug`, `title`, `date`,
 `BlogPost.jsx` renders `sections` in order; `BlogIndex.jsx` renders a card per
 post using the same tokens (border, flat shadow, mono meta) at a smaller scale.
 
-## Site-wide cursor & selection
+## Site-wide selection, cursor scoped to articles
 
-Applied globally in `src/index.css` / `CustomCursor.jsx`, not just on blog
-pages — these tie the neobrutalist palette into the rest of the site:
+Applied in `src/index.css` / `CustomCursor.jsx` — the selection color is
+global, but the blue-dot cursor only ever appears on article pages:
 
-- Text selection: `background: #FFE135` (the same yellow accent as tags),
-  `color: #1a1a1a`.
-- Pointer: native cursor hidden (`cursor: none` on fine-pointer devices only —
-  touch devices are left alone), replaced by a 20px circle, `background:
-  #3b82f6`, `border: 3px solid #1a1a1a`, following the mouse via a single
-  `fixed`, `pointer-events-none` div (`CustomCursor.jsx`) mounted once in
-  `App.jsx` so it persists across routes. Its `z-index` (100000) sits above
-  everything, including `CursorToggle`'s button (10000), so the dot stays
-  visible over UI — `pointer-events-none` still lets clicks fall through to
-  whatever's underneath it.
+- Text selection (everywhere): `background: #FFE135` (the same yellow accent
+  as tags), `color: #1a1a1a`.
+- Pointer: the native cursor is untouched on the home page and the `/blog`
+  index — only `/blog/:slug` article pages can activate the dot, and only if
+  the toggle is on. `CustomCursor.jsx` combines the toggle's `enabled` state
+  with `useLocation().pathname` matching `/^\/blog\/[^/]+/`; either condition
+  being false means native cursor. Route changes are in the effect's
+  dependency array, so navigating away from an article restores the native
+  pointer immediately (same atomic swap as the toggle itself), not on the
+  next mousemove.
+- When active: a 20px circle, `background: #3b82f6`, `border: 3px solid
+  #1a1a1a`, following the mouse via a single `fixed`, `pointer-events-none`
+  div mounted once in `App.jsx` (so its "have we seen a mousemove yet" state
+  survives navigation) rather than per-page. Its `z-index` (100000) sits
+  above everything, including `CursorToggle`'s button (10000), so the dot
+  stays visible over UI — `pointer-events-none` still lets clicks fall
+  through to whatever's underneath it.
 - `CursorToggle.jsx` (top-right, article pages only — not the `/blog` index): a small fixed-width button
   (so "On" ↔ "Off" doesn't reflow it) showing just the state word plus a mini
   replica of the dot; clicking it flashes the button's own background blue
