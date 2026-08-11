@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowLeft, ArrowRight } from "lucide-react";
 import { posts } from "../data/posts.js";
+import CursorToggle from "../components/CursorToggle.jsx";
 
 // Same design tokens as BlogPost.jsx — see docs/blog-post-design.md.
 
@@ -14,6 +15,7 @@ export default function BlogIndex() {
         padding: "3rem 1.5rem 6rem 1.5rem",
       }}
     >
+      <CursorToggle />
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "3rem" }}>
           <Link to="/" style={{ textDecoration: "none" }}>

@@ -1,6 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import { ArrowLeft } from "lucide-react";
 import { getPostBySlug } from "../data/posts.js";
+import CursorToggle from "../components/CursorToggle.jsx";
 
 // Design lifted from the reference neobrutalist blog post layout — see
 // docs/blog-post-design.md for the full spec (colors, fonts, spacing).
@@ -24,6 +25,7 @@ export default function BlogPost() {
           fontFamily: "'Space Grotesk', sans-serif",
         }}
       >
+        <CursorToggle />
         <p>Post not found.</p>
         <BackLink />
       </div>
@@ -39,6 +41,7 @@ export default function BlogPost() {
         padding: "3rem 1.5rem 6rem 1.5rem",
       }}
     >
+      <CursorToggle />
       <div style={{ maxWidth: 720, margin: "0 auto" }}>
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "4rem" }}>
           <BackLink />

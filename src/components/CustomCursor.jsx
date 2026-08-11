@@ -1,13 +1,17 @@
 import { useEffect, useRef } from "react";
+import { useCursor } from "../context/CursorContext.jsx";
 
 // Replaces the native pointer with a blue circle / black border dot (see
 // docs/blog-post-design.md for the palette) — index.css sets `cursor: none`
-// site-wide on fine-pointer devices to make room for it.
+// site-wide on fine-pointer devices, scoped to html.custom-cursor, which
+// CursorContext toggles. CursorToggle.jsx is the on/off button.
 
 export default function CustomCursor() {
   const dotRef = useRef(null);
+  const { enabled } = useCursor();
 
   useEffect(() => {
+    if (!enabled) return;
     if (window.matchMedia("(pointer: coarse)").matches) return; // touch: no cursor to replace
 
     const el = dotRef.current;
@@ -23,7 +27,9 @@ export default function CustomCursor() {
 
     window.addEventListener("mousemove", handleMove);
     return () => window.removeEventListener("mousemove", handleMove);
-  }, []);
+  }, [enabled]);
+
+  if (!enabled) return null;
 
   return (
     <div
