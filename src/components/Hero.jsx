@@ -30,9 +30,10 @@ export default function Hero() {
   }, []);
 
   return (
-    // pointer-events-none here lets mousemove fall through to the fluid
-    // canvas underneath (it only listens on the canvas element itself), so
-    // the effect reacts everywhere — buttons opt back in with pointer-events-auto.
+    // pointer-events-none here so only the interactive buttons (which opt back
+    // in with pointer-events-auto) are clickable; the rest of the hero ignores
+    // the mouse. The fluid layer now sits on top and forwards its own pointer
+    // input, so it reacts everywhere regardless of this.
     <div className="pointer-events-none relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
       {/* faint huge background wordmark */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
