@@ -27,7 +27,10 @@ export default function Hero() {
   }, []);
 
   return (
-    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
+    // pointer-events-none here lets mousemove fall through to the fluid
+    // canvas underneath (it only listens on the canvas element itself), so
+    // the effect reacts everywhere — buttons opt back in with pointer-events-auto.
+    <div className="pointer-events-none relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
       {/* faint huge background wordmark */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
         <div
@@ -40,7 +43,7 @@ export default function Hero() {
 
       {/* top-left floating badge */}
       <button
-        className={`fixed top-8 left-6 z-[51] group flex cursor-pointer items-center gap-2 rounded-full border bg-transparent px-4 py-2.5 backdrop-blur-2xl transition-all duration-300 hover:shadow-xl ${
+        className={`pointer-events-auto fixed top-8 left-6 z-[51] group flex cursor-pointer items-center gap-2 rounded-full border bg-transparent px-4 py-2.5 backdrop-blur-2xl transition-all duration-300 hover:shadow-xl ${
           mounted ? "opacity-100 scale-100" : "opacity-0 scale-[0.8]"
         }`}
         style={{ transition: "opacity 0.6s ease, transform 0.6s ease" }}
@@ -65,7 +68,7 @@ export default function Hero() {
         <div className="z-[100]">
           <button
             aria-label="About me"
-            className="h-auto w-auto cursor-pointer rounded-2xl bg-white/30 p-3 shadow-lg backdrop-blur-lg transition-colors hover:bg-white/60"
+            className="pointer-events-auto h-auto w-auto cursor-pointer rounded-2xl bg-white/30 p-3 shadow-lg backdrop-blur-lg transition-colors hover:bg-white/60"
           >
             <User className="h-6 w-6 text-neutral-700 md:h-8 md:w-8" />
             <span className="sr-only">About me</span>
@@ -95,7 +98,7 @@ export default function Hero() {
           {NAV_ITEMS.map(({ label, icon: Icon, color }) => (
             <button
               key={label}
-              className="border-border aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10"
+              className="pointer-events-auto border-border aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10"
             >
               <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
                 <Icon size={22} stroke={color} strokeWidth={2} />
