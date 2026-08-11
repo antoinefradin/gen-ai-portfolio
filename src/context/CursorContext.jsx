@@ -10,7 +10,9 @@ export function CursorProvider({ children }) {
   });
 
   useEffect(() => {
-    document.documentElement.classList.toggle("custom-cursor", enabled);
+    // The html.custom-cursor class itself is owned by CustomCursor.jsx —
+    // it needs to combine `enabled` with "do we know the pointer position
+    // yet" so the native cursor and the dot never both disappear at once.
     localStorage.setItem(STORAGE_KEY, String(enabled));
   }, [enabled]);
 

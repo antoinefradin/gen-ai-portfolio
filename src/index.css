@@ -44,8 +44,9 @@ body {
   color: #1a1a1a;
 }
 
-/* Toggled by CursorToggle.jsx via CursorContext — html.custom-cursor is the
-   default (see index.html), removed when the user turns the dot off. */
+/* html.custom-cursor is added/removed by CustomCursor.jsx itself (only once
+   it knows where to draw the dot, so the native pointer and the dot are
+   never both hidden at the same time) — not present by default here. */
 @media (pointer: fine) {
   html.custom-cursor * {
     cursor: none !important;

@@ -82,7 +82,7 @@ pages — these tie the neobrutalist palette into the rest of the site:
   everything, including `CursorToggle`'s button (10000), so the dot stays
   visible over UI — `pointer-events-none` still lets clicks fall through to
   whatever's underneath it.
-- `CursorToggle.jsx` (top-right on blog pages): a small fixed-width button
+- `CursorToggle.jsx` (top-right, article pages only — not the `/blog` index): a small fixed-width button
   (so "On" ↔ "Off" doesn't reflow it) showing just the state word plus a mini
   replica of the dot; clicking it flashes the button's own background blue
   (`cursorToggleFlash` keyframe in `index.css`) as press feedback.

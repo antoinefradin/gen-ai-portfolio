@@ -2,34 +2,43 @@ import { useEffect, useRef } from "react";
 import { useCursor } from "../context/CursorContext.jsx";
 
 // Replaces the native pointer with a blue circle / black border dot (see
-// docs/blog-post-design.md for the palette) — index.css sets `cursor: none`
-// site-wide on fine-pointer devices, scoped to html.custom-cursor, which
-// CursorContext toggles. CursorToggle.jsx is the on/off button.
+// docs/blog-post-design.md for the palette). There must never be a moment
+// with *no* visible cursor, so the native pointer and the dot are swapped
+// atomically: html.custom-cursor (which hides the native cursor, see
+// index.css) is only added once we actually know where to draw the dot —
+// never speculatively — and both the class and the dot's opacity flip in
+// the same function call.
 
 export default function CustomCursor() {
   const dotRef = useRef(null);
+  const hasPositionRef = useRef(false);
   const { enabled } = useCursor();
 
   useEffect(() => {
-    if (!enabled) return;
-    if (window.matchMedia("(pointer: coarse)").matches) return; // touch: no cursor to replace
+    if (window.matchMedia("(pointer: coarse)").matches) return; // touch: nothing to swap
 
-    const el = dotRef.current;
-    let shown = false;
+    function sync() {
+      const showDot = enabled && hasPositionRef.current;
+      document.documentElement.classList.toggle("custom-cursor", showDot);
+      if (dotRef.current) dotRef.current.style.opacity = showDot ? "1" : "0";
+    }
 
     function handleMove(e) {
-      if (!shown) {
-        shown = true;
-        el.style.opacity = "1";
+      hasPositionRef.current = true;
+      if (dotRef.current) {
+        dotRef.current.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
       }
-      el.style.transform = `translate3d(${e.clientX}px, ${e.clientY}px, 0) translate(-50%, -50%)`;
+      sync();
     }
 
     window.addEventListener("mousemove", handleMove);
-    return () => window.removeEventListener("mousemove", handleMove);
-  }, [enabled]);
+    sync(); // re-apply immediately on toggle, using whatever position we already have
 
-  if (!enabled) return null;
+    return () => {
+      window.removeEventListener("mousemove", handleMove);
+      document.documentElement.classList.remove("custom-cursor");
+    };
+  }, [enabled]);
 
   return (
     <div
