@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import {
   ChevronRight,
   Laugh,
@@ -6,6 +7,7 @@ import {
   Layers,
   PartyPopper,
   UserRoundSearch,
+  Newspaper,
   Sparkles,
   User,
 } from "lucide-react";
@@ -14,6 +16,7 @@ const NAV_ITEMS = [
   { label: "Me", icon: Laugh, color: "#329696" },
   { label: "Projects", icon: BriefcaseBusiness, color: "#3E9858" },
   { label: "Skills", icon: Layers, color: "#856ED9" },
+  { label: "Blog", icon: Newspaper, color: "#FF6B9D", to: "/blog" },
   { label: "Fun", icon: PartyPopper, color: "#B95F9D" },
   { label: "Contact", icon: UserRoundSearch, color: "#C19433" },
 ];
@@ -94,18 +97,26 @@ export default function Hero() {
           transform: mounted ? "translateY(0)" : "translateY(80px)",
         }}
       >
-        <div className="mt-4 grid w-full max-w-2xl grid-cols-1 gap-3 sm:grid-cols-3 md:grid-cols-5">
-          {NAV_ITEMS.map(({ label, icon: Icon, color }) => (
-            <button
-              key={label}
-              className="pointer-events-auto border-border aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10"
-            >
+        <div className="mt-4 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
+          {NAV_ITEMS.map(({ label, icon: Icon, color, to }) => {
+            const className =
+              "pointer-events-auto border-border aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10";
+            const content = (
               <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
                 <Icon size={22} stroke={color} strokeWidth={2} />
                 <span className="text-xs font-medium sm:text-sm">{label}</span>
               </div>
-            </button>
-          ))}
+            );
+            return to ? (
+              <Link key={label} to={to} className={className}>
+                {content}
+              </Link>
+            ) : (
+              <button key={label} className={className}>
+                {content}
+              </button>
+            );
+          })}
         </div>
       </div>
     </div>

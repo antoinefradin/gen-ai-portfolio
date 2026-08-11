@@ -1,11 +1,16 @@
-import Hero from "./components/Hero.jsx";
-import FluidSwitcher from "./components/background/FluidSwitcher.jsx";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home.jsx";
+import BlogIndex from "./pages/BlogIndex.jsx";
+import BlogPost from "./pages/BlogPost.jsx";
 
 export default function App() {
   return (
-    <main className="flex min-h-screen flex-col">
-      <Hero />
-      <FluidSwitcher />
-    </main>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<BlogIndex />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
