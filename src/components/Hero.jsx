@@ -89,10 +89,13 @@ export default function Hero() {
         <h1 className="mt-4 text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">Your Role</h1>
       </div>
 
-      {/* hero avatar */}
-      <div className="relative z-10 flex h-52 w-48 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 sm:h-72 sm:w-72">
-        <User className="h-24 w-24 text-white/90 sm:h-32 sm:w-32" strokeWidth={1.5} />
-      </div>
+      {/* hero avatar — memoji */}
+      <img
+        src="/hero-memoji.png"
+        alt="Memoji of me"
+        draggable={false}
+        className="relative z-10 h-52 w-auto select-none drop-shadow-xl sm:h-72"
+      />
 
       {/* nav grid (ask-me-anything bar intentionally removed) */}
       <div
