@@ -94,7 +94,7 @@ export default function Hero() {
         src="/hero-memoji.png"
         alt="Memoji of me"
         draggable={false}
-        className="relative z-10 h-52 w-auto select-none drop-shadow-xl sm:h-72"
+        className="relative z-10 h-52 w-auto select-none drop-shadow-xl sm:h-[22rem]"
       />
 
       {/* nav grid (ask-me-anything bar intentionally removed) */}
