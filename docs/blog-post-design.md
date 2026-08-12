@@ -82,6 +82,12 @@ global, but the blue-dot cursor only ever appears on article pages:
   dependency array, so navigating away from an article restores the native
   pointer immediately (same atomic swap as the toggle itself), not on the
   next mousemove.
+- Touch devices are opted out entirely: `CustomCursor.jsx` returns early when
+  `matchMedia("(pointer: coarse)")` matches, so the `custom-cursor` class is
+  never applied and the native pointer/touch behavior is left alone.
+- Persistence: the toggle state lives in `CursorContext.jsx`, backed by
+  `localStorage` (key `customCursorEnabled`), and **defaults to on** when
+  nothing is stored — so the preference survives reloads and navigation.
 - When active: a 20px circle, `background: #3b82f6`, `border: 3px solid
   #1a1a1a`, following the mouse via a single `fixed`, `pointer-events-none`
   div mounted once in `App.jsx` (so its "have we seen a mousemove yet" state

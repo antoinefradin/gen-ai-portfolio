@@ -8,6 +8,7 @@
    so font-weight: 800 in blog styles renders as the browser's closest match. */
 @import "@fontsource/space-grotesk/500.css";
 @import "@fontsource/space-grotesk/700.css";
+@import "@fontsource/ibm-plex-mono/600.css";
 @import "@fontsource/ibm-plex-mono/700.css";
 
 @tailwind base;
@@ -61,5 +62,19 @@ body {
   }
   100% {
     background-color: #fff;
+  }
+}
+
+/* Blinking underscore caret for TypewriterHeading.jsx (the neobrutalist
+   terminal-tag heading in the hero). Hard on/off, no fade — reads as a
+   terminal cursor rather than a pulsing glow. */
+@keyframes typewriterBlink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0;
   }
 }

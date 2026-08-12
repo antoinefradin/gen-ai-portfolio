@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import TypewriterHeading from "./TypewriterHeading";
 import {
   ChevronRight,
   Laugh,
@@ -30,10 +31,9 @@ export default function Hero() {
   }, []);
 
   return (
-    // pointer-events-none here so only the interactive buttons (which opt back
-    // in with pointer-events-auto) are clickable; the rest of the hero ignores
-    // the mouse. The fluid layer now sits on top and forwards its own pointer
-    // input, so it reacts everywhere regardless of this.
+    // pointer-events-none here lets mousemove fall through to the fluid
+    // canvas underneath (it only listens on the canvas element itself), so
+    // the effect reacts everywhere — buttons opt back in with pointer-events-auto.
     <div className="pointer-events-none relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 pb-10 md:pb-20">
       {/* faint huge background wordmark */}
       <div className="pointer-events-none absolute inset-x-0 bottom-0 flex justify-center overflow-hidden">
@@ -81,13 +81,21 @@ export default function Hero() {
         <h2 className="mt-1 text-xl font-semibold text-secondary-foreground md:text-2xl">
           Hey, I'm Your Name 👋
         </h2>
-        <h1 className="text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">Your Role</h1>
+        <div className="mt-4">
+          <TypewriterHeading
+            phrases={["ML Systems Builder", "Full-Stack Developer", "GenAI Tinkerer"]}
+          />
+        </div>
+        <h1 className="mt-4 text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">Your Role</h1>
       </div>
 
-      {/* hero avatar */}
-      <div className="relative z-10 flex h-52 w-48 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-indigo-200 via-purple-200 to-pink-200 sm:h-72 sm:w-72">
-        <User className="h-24 w-24 text-white/90 sm:h-32 sm:w-32" strokeWidth={1.5} />
-      </div>
+      {/* hero avatar — memoji */}
+      <img
+        src="/hero-memoji.png"
+        alt="Memoji of me"
+        draggable={false}
+        className="relative z-10 h-52 w-auto select-none drop-shadow-xl sm:h-[22rem]"
+      />
 
       {/* nav grid (ask-me-anything bar intentionally removed) */}
       <div
