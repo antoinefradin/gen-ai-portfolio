@@ -9,28 +9,12 @@
         `position: absolute` at top/right, and opts back into pointer events in
         case an ancestor disables them (Hero root is pointer-events-none). */
 
-.switcher {
-  position: absolute;
-  z-index: 60;
-  top: 1.25rem;
-  right: 1.25rem;
-  /* Half the pen's size: scales the whole pill uniformly — dimensions, thumb
-     + its travel, glass shadows, and blur — anchored to the top-right so it
-     stays pinned in the corner. */
-  transform: scale(0.5);
-  transform-origin: top right;
-  pointer-events: auto;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  width: 244px;
-  max-width: 244px;
-  height: 70px;
-  box-sizing: border-box;
-  padding: 8px 12px 10px;
-  margin: 0;
-  border: none;
-  border-radius: 99em;
+/* Shared liquid-glass surface — the tinted-glass material (background tint,
+   backdrop blur + refraction, the 11-layer highlight/shadow stack) lifted out
+   of .switcher so the "Your Portfolio" badge (Hero.jsx) can wear the exact same
+   glass. All values read the theme's --c-* / --glass-* vars, so both users
+   recolor together across light/dark/dim. border-radius stays per-element. */
+.liquid-glass {
   background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
   backdrop-filter: blur(8px) url(#switcher) saturate(var(--saturation));
   -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
@@ -48,6 +32,32 @@
   transition:
     background-color 400ms cubic-bezier(1, 0, 0.4, 1),
     box-shadow 400ms cubic-bezier(1, 0, 0.4, 1);
+}
+
+.switcher {
+  position: absolute;
+  z-index: 60;
+  top: 2rem;
+  right: 1.5rem;
+  /* 0.575 = half the pen's size (0.5) bumped 15%; scales the whole pill
+     uniformly — dimensions, thumb + its travel, glass shadows, and blur.
+     Anchored top-right so it stays pinned in the corner, at 1.5rem from the
+     right edge — mirroring the badge's 1.5rem left margin — with its top edge
+     level with the badge (top: 2rem == the badge's Tailwind top-8). */
+  transform: scale(0.575);
+  transform-origin: top right;
+  pointer-events: auto;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 244px;
+  max-width: 244px;
+  height: 70px;
+  box-sizing: border-box;
+  padding: 8px 12px 10px;
+  margin: 0;
+  border: none;
+  border-radius: 99em;
 }
 
 .switcher__legend {

@@ -49,7 +49,7 @@ export default function Hero() {
 
       {/* top-left floating badge */}
       <button
-        className={`pointer-events-auto fixed top-8 left-6 z-[51] group flex cursor-pointer items-center gap-2 rounded-full border bg-transparent px-4 py-2.5 backdrop-blur-2xl transition-all duration-300 hover:shadow-xl ${
+        className={`liquid-glass pointer-events-auto fixed top-8 left-6 z-[51] group flex cursor-pointer items-center gap-2 rounded-full px-4 py-2.5 transition-all duration-300 ${
           mounted ? "opacity-100 scale-100" : "opacity-0 scale-[0.8]"
         }`}
         style={{ transition: "opacity 0.6s ease, transform 0.6s ease" }}

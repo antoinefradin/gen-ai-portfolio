@@ -65,7 +65,7 @@ export default function ThemeToggle() {
   };
 
   return (
-    <fieldset className="switcher" ref={fieldsetRef}>
+    <fieldset className="switcher liquid-glass" ref={fieldsetRef}>
       <legend className="switcher__legend">Choose theme</legend>
 
       {OPTIONS.map(({ value, label }) => (
