@@ -4,10 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "oklch(1 0 0)",
-        foreground: "oklch(0.141 0.005 285.823)",
-        "secondary-foreground": "oklch(0.21 0.006 285.885)",
-        border: "oklch(0.92 0.004 286.32)",
+        // Backed by CSS custom properties (defined in src/index.css) so these
+        // utilities follow the active theme. Values on :root equal the previous
+        // literals, so untouched pages render identically.
+        background: "var(--background)",
+        foreground: "var(--foreground)",
+        "secondary-foreground": "var(--secondary-foreground)",
+        border: "var(--border)",
       },
     },
   },

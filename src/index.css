@@ -15,9 +15,80 @@
 @tailwind components;
 @tailwind utilities;
 
+/* ─── Theme palettes ───────────────────────────────────────────────────────
+   :root is the LIGHT look and is what every page gets by default. Only the
+   HOME page opts into dark/dim: Home.jsx sets html[data-theme="…"] while it is
+   mounted and removes it on unmount, so blog routes always render :root (light)
+   and stay byte-for-byte identical to before this feature.
+
+   Semantic tokens (--ink/--surface/…) back the hero components that used to
+   hardcode light-only colors. The --c-* / --glass-* / --saturation vars drive
+   the liquid-glass switcher (theme-toggle.css); values come from the reference
+   pen (codepen.io/fooontic/pen/KwpRaGr). */
 :root {
   --background: oklch(1 0 0);
   --foreground: oklch(0.141 0.005 285.823);
+  --secondary-foreground: oklch(0.21 0.006 285.885);
+  --border: oklch(0.92 0.004 286.32);
+  color-scheme: light;
+
+  --ink: #1a1a1a;
+  --surface: rgba(255, 255, 255, 0.3);
+  --surface-hover: rgba(255, 255, 255, 0.6);
+  --surface-solid: #fff;
+  --muted: #404040;
+
+  --c-glass: #bbbbbc;
+  --c-light: #fff;
+  --c-dark: #000;
+  --c-content: #224;
+  --c-action: #0052f5;
+  --glass-reflex-light: 1;
+  --glass-reflex-dark: 1;
+  --saturation: 150%;
+}
+
+html[data-theme="dark"] {
+  --background: #1b1b1d;
+  --foreground: #e1e1e1;
+  --secondary-foreground: #cfcfcf;
+  --border: #33343a;
+  color-scheme: dark;
+
+  --ink: #e6e6e6;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.12);
+  --surface-solid: #2a2a2e;
+  --muted: #a9a9b0;
+
+  --c-content: #e1e1e1;
+  --c-action: #03d5ff;
+  --glass-reflex-light: 0.3;
+  --glass-reflex-dark: 2;
+  --saturation: 150%;
+}
+
+html[data-theme="dim"] {
+  --background: #152433;
+  --foreground: #d5dbe2;
+  --secondary-foreground: #b9c2cc;
+  --border: #26384a;
+  color-scheme: dark;
+
+  --ink: #dbe2ea;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-hover: rgba(255, 255, 255, 0.12);
+  --surface-solid: #1d3345;
+  --muted: #9fb0c0;
+
+  --c-light: #99deff;
+  --c-dark: #20001b;
+  --c-glass: hsl(335 250% 74% / 1);
+  --c-content: #d5dbe2;
+  --c-action: #ff48a9;
+  --glass-reflex-light: 0.7;
+  --glass-reflex-dark: 2;
+  --saturation: 200%;
 }
 
 * {
@@ -36,6 +107,11 @@ body {
   color: var(--foreground);
   font-family: "Geist Sans", ui-sans-serif, system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  /* Smooth fade when the home page switches theme (matches the reference pen).
+     Blog pages never change theme, so this transition never triggers there. */
+  transition:
+    background-color 400ms cubic-bezier(1, 0, 0.4, 1),
+    color 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
 /* Site-wide selection + cursor — colors match the neobrutalist blog

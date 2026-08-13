@@ -52,7 +52,7 @@ export default function Hero() {
         }`}
         style={{ transition: "opacity 0.6s ease, transform 0.6s ease" }}
       >
-        <Sparkles className="h-5 w-5 text-neutral-700" />
+        <Sparkles className="h-5 w-5 text-[color:var(--muted)]" />
         <span className="hidden text-sm font-medium text-foreground sm:inline">
           Your Portfolio
         </span>
@@ -72,9 +72,9 @@ export default function Hero() {
         <div className="z-[100]">
           <button
             aria-label="About me"
-            className="pointer-events-auto h-auto w-auto cursor-pointer rounded-2xl bg-white/30 p-3 shadow-lg backdrop-blur-lg transition-colors hover:bg-white/60"
+            className="pointer-events-auto h-auto w-auto cursor-pointer rounded-2xl bg-[color:var(--surface)] p-3 shadow-lg backdrop-blur-lg transition-colors hover:bg-[color:var(--surface-hover)]"
           >
-            <User className="h-6 w-6 text-neutral-700 md:h-8 md:w-8" />
+            <User className="h-6 w-6 text-[color:var(--muted)] md:h-8 md:w-8" />
             <span className="sr-only">About me</span>
           </button>
         </div>
@@ -109,9 +109,9 @@ export default function Hero() {
         <div className="mt-4 grid w-full max-w-3xl grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-6">
           {NAV_ITEMS.map(({ label, icon: Icon, color, to }) => {
             const className =
-              "pointer-events-auto border-border aspect-square w-full cursor-pointer rounded-2xl border bg-white/30 py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10";
+              "pointer-events-auto border-border aspect-square w-full cursor-pointer rounded-2xl border bg-[color:var(--surface)] py-8 shadow-none backdrop-blur-lg transition-colors hover:bg-border/30 active:scale-95 md:p-10";
             const content = (
-              <div className="flex h-full flex-col items-center justify-center gap-1 text-gray-700">
+              <div className="flex h-full flex-col items-center justify-center gap-1 text-[color:var(--muted)]">
                 <Icon size={22} stroke={color} strokeWidth={2} />
                 <span className="text-xs font-medium sm:text-sm">{label}</span>
               </div>

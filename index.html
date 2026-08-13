@@ -4,6 +4,16 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Portfolio</title>
+    <script>
+      // Apply the saved theme before paint to avoid a flash of light on the
+      // home page. Guarded to "/" so blog URLs are never themed (they own no
+      // theme — matches the runtime scoping in Home.jsx).
+      (function () {
+        if (location.pathname !== "/") return;
+        var t = localStorage.getItem("themePreference");
+        if (t === "dark" || t === "dim") document.documentElement.dataset.theme = t;
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>
