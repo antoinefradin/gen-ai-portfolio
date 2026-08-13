@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import TypewriterHeading from "./TypewriterHeading";
+import AnimatedRole from "./AnimatedRole";
+import ScrollIndicator from "./ScrollIndicator";
 import {
   ChevronRight,
   Laugh,
@@ -86,7 +88,11 @@ export default function Hero() {
             phrases={["ML Systems Builder", "Full-Stack Developer", "GenAI Tinkerer"]}
           />
         </div>
-        <h1 className="mt-4 text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">Your Role</h1>
+        <h1 className="mt-4 text-4xl font-bold sm:text-5xl md:text-6xl lg:text-7xl">
+          <AnimatedRole
+            phrases={["GEN AI ENGINEER", "AI ENGINEER", "SENIOR ML ENGINEER"]}
+          />
+        </h1>
       </div>
 
       {/* hero avatar — memoji */}
@@ -128,6 +134,9 @@ export default function Hero() {
           })}
         </div>
       </div>
+
+      {/* bottom-center scroll hint — smooth-scrolls one viewport down */}
+      <ScrollIndicator />
     </div>
   );
 }

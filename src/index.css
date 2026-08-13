@@ -154,3 +154,35 @@ body {
     opacity: 0;
   }
 }
+
+/* Scroll-down indicator for the hero (ScrollIndicator.jsx). The mouse body
+   gently bobs while the inner dot slides down and fades — a classic "scroll
+   wheel" cue. No offset shadow: the neobrutalist hard shadow is intentionally
+   dropped here so the indicator reads as a light, ambient hint. */
+@keyframes scrollMouseBob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(6px);
+  }
+}
+
+@keyframes scrollWheelDrop {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+}
