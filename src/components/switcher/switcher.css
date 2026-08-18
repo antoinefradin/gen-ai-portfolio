@@ -67,6 +67,35 @@
   border-radius: 99em;
 }
 
+/* Static comparison twin of the switcher: same liquid-glass pill (identical box
+   metrics + the strong #switcher refraction), but non-interactive — just a
+   label. Pinned top-left, directly below the "Your Portfolio" badge, so the two
+   glass treatments can be compared. No radio inputs, no ::after thumb. */
+.glass-compare {
+  --glass-refraction: url(#switcher);   /* strong, same as .switcher */
+  position: fixed;
+  z-index: 51;                          /* same layer as the badge above it */
+  top: 4.75rem;                         /* just below the badge (top-8 + height) */
+  left: 1.5rem;                         /* matches the badge's left-6 */
+  transform: scale(0.575);
+  transform-origin: top left;           /* scale hugs the top-left anchor */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 244px;
+  max-width: 244px;
+  height: 70px;
+  box-sizing: border-box;
+  padding: 8px 12px 10px;
+  border: none;
+  border-radius: 99em;
+  color: var(--c-content);
+  font-weight: 600;
+  font-size: 22px;                      /* × 0.575 ≈ 13px visual */
+  white-space: nowrap;
+  pointer-events: none;                 /* pure comparison element */
+}
+
 .switcher__legend {
   position: absolute;
   width: 1px;
