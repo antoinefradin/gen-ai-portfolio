@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import Hero from "../components/Hero.jsx";
 import FluidSwitcher from "../components/background/FluidSwitcher.jsx";
-import ThemeToggle from "../components/theme/ThemeToggle.jsx";
+import Switcher from "../components/switcher/Switcher.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
 
 export default function Home() {
@@ -31,7 +31,7 @@ export default function Home() {
         <p className="mt-4 max-w-md text-[color:var(--muted)]">More coming soon.</p>
       </section>
 
-      <ThemeToggle />
+      <Switcher />
       <FluidSwitcher />
     </main>
   );

@@ -23,7 +23,7 @@
 
    Semantic tokens (--ink/--surface/…) back the hero components that used to
    hardcode light-only colors. The --c-* / --glass-* / --saturation vars drive
-   the liquid-glass switcher (theme-toggle.css); values come from the reference
+   the liquid-glass switcher (switcher.css); values come from the reference
    pen (codepen.io/fooontic/pen/KwpRaGr). */
 :root {
   --background: oklch(1 0 0);

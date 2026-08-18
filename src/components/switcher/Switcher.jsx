@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { useTheme } from "../../context/ThemeContext.jsx";
 import glassDisplacementMap from "./glassDisplacementMap.js";
-import "./theme-toggle.css";
+import "./switcher.css";
 
 // Maps each theme to the pen's `c-option` index (drives the sliding glass thumb
 // position + morph direction via the CSS `:has()` / [c-previous] selectors).
@@ -44,7 +44,7 @@ const OPTIONS = [
   { value: "dim", label: "Dim" },
 ];
 
-export default function ThemeToggle() {
+export default function Switcher() {
   const { theme, setTheme } = useTheme();
   const fieldsetRef = useRef(null);
   // Tracks the previously-selected option so the thumb knows which edge to
