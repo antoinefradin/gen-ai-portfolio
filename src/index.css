@@ -114,6 +114,22 @@ body {
     color 400ms cubic-bezier(1, 0, 0.4, 1);
 }
 
+/* Sunset backdrop — only the Dim ("sunset") theme swaps the flat --background
+   for the mountain photo. Painted on <body>, which already shows through the
+   transparent WebGL fluid canvas (z-0), so the liquid splats + liquid-glass UI
+   refract over the photo. The layered gradient is a dark scrim that keeps the
+   light Dim-theme text/glass legible over the bright sky. --background stays as
+   the fallback beneath the image (and while it loads). */
+html[data-theme="dim"] body {
+  background-image:
+    linear-gradient(rgba(21, 36, 51, 0.35), rgba(21, 36, 51, 0.6)),
+    url("/assets/sunset-mountains.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
 /* Site-wide selection + cursor — colors match the neobrutalist blog
    palette (docs/blog-post-design.md: yellow #FFE135, black borders). */
 ::selection {
