@@ -15,8 +15,12 @@
    glass. All values read the theme's --c-* / --glass-* vars, so both users
    recolor together across light/dark/dim. border-radius stays per-element. */
 .liquid-glass {
+  /* Which refraction filter to use — defaults to the gentle #glass-soft (right
+     for the larger badge & nav bar, where the strong filter smears). The switcher
+     overrides this back to url(#switcher) below. See Switcher.jsx for both. */
+  --glass-refraction: url(#glass-soft);
   background-color: color-mix(in srgb, var(--c-glass) 12%, transparent);
-  backdrop-filter: blur(8px) url(#switcher) saturate(var(--saturation));
+  backdrop-filter: blur(8px) var(--glass-refraction) saturate(var(--saturation));
   -webkit-backdrop-filter: blur(8px) saturate(var(--saturation));
   box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--c-light) calc(var(--glass-reflex-light) * 10%), transparent),
@@ -35,6 +39,9 @@
 }
 
 .switcher {
+  /* Override the .liquid-glass default — the switcher is small enough for the
+     strong refraction to stay crisp (the map downscales onto it). */
+  --glass-refraction: url(#switcher);
   position: absolute;
   z-index: 60;
   top: 2rem;

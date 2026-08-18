@@ -86,9 +86,14 @@ export default function Switcher() {
         </label>
       ))}
 
-      {/* SVG filter that powers `backdrop-filter: url(#switcher)` — must exist in
-          the DOM for the refraction to resolve. Chrome/Edge render the refraction;
-          Safari ignores url() filters in backdrop-filter and falls back to blur. */}
+      {/* SVG filters that power `backdrop-filter: url(#…)` — must exist in the DOM
+          for the refraction to resolve. Chrome/Edge render the refraction; Safari
+          ignores url() filters in backdrop-filter and falls back to blur.
+          Both use primitiveUnits="objectBoundingBox", so displacement scales with
+          element size — hence two filters (see .liquid-glass in switcher.css):
+            #switcher   — strong, tuned for the small switcher pill.
+            #glass-soft — gentle, for the larger badge & nav bar, where scale=0.5
+                          would magnify the backdrop into a pixelated rainbow. */}
       <div className="switcher__filter">
         <svg>
           <filter id="switcher" primitiveUnits="objectBoundingBox">
@@ -106,6 +111,28 @@ export default function Switcher() {
               in="blur"
               in2="map"
               scale="0.5"
+              xChannelSelector="R"
+              yChannelSelector="G"
+            />
+          </filter>
+          {/* Same map, much smaller displacement scale so the backdrop isn't
+              magnified into a smear on big elements. preserveAspectRatio="none"
+              stretches the map to the full box (no truncation at the ends). */}
+          <filter id="glass-soft" primitiveUnits="objectBoundingBox">
+            <feImage
+              result="map"
+              width="100%"
+              height="100%"
+              x="0"
+              y="0"
+              preserveAspectRatio="none"
+              href={glassDisplacementMap}
+            />
+            <feGaussianBlur in="SourceGraphic" stdDeviation="0.04" result="blur" />
+            <feDisplacementMap
+              in="blur"
+              in2="map"
+              scale="0.1"
               xChannelSelector="R"
               yChannelSelector="G"
             />
