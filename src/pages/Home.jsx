@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Hero from "../components/Hero.jsx";
 import FluidSwitcher from "../components/background/FluidSwitcher.jsx";
 import Switcher from "../components/switcher/Switcher.jsx";
+import Button from "../components/button/Button.jsx";
 import { useTheme } from "../context/ThemeContext.jsx";
 
 export default function Home() {
@@ -32,6 +33,14 @@ export default function Home() {
       </section>
 
       <Switcher />
+
+      {/* Liquid-glass demo pill — pinned just below the Switcher, sharing the
+          same top-right anchor (absolute, not fixed, so it scrolls away with
+          the hero). right-6 aligns its right edge with the switcher's. */}
+      <div className="absolute right-6 top-20 z-50">
+        <Button />
+      </div>
+
       <FluidSwitcher />
     </main>
   );
