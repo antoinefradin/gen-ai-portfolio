@@ -1,0 +1,48 @@
+/* Liquid-glass menu bar — bar format ported from
+   https://codepen.io/samarkandiy/pen/yyNvNGQ ("Apple Liquid Glass UI 2025").
+   Faithful look: white text, bright specular, fixed translucent-white tint.
+   Only the bar shell is copied; content is our own social links (Hero.jsx).
+
+   Four stacked layers sit behind the content:
+     __filter  — refracts the backdrop through the #lg-dist SVG filter
+     __overlay — translucent white tint (the pen's --lg-bg-color)
+     __specular— inset white edge highlight (the pen's --lg-highlight)
+     __content — the actual grid of items (z-index above all three) */
+.lg-bar {
+  position: relative;
+  color: #fff;
+  border-radius: 2.5rem;               /* adjustable; multi-row grid, not a stadium pill */
+  overflow: hidden;
+  box-shadow: 0 6px 6px rgba(0, 0, 0, 0.2), 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.lg-bar__filter {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  backdrop-filter: blur(0px);          /* pen value; bump to ~2px for more frosting */
+  -webkit-backdrop-filter: blur(0px);
+  filter: url(#lg-dist);
+  isolation: isolate;
+}
+
+.lg-bar__overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.lg-bar__specular {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border-radius: inherit;
+  overflow: hidden;
+  box-shadow: inset 1px 1px 0 rgba(255, 255, 255, 0.75),
+    inset 0 0 5px rgba(255, 255, 255, 0.75);
+}
+
+.lg-bar__content {
+  position: relative;
+  z-index: 3;
+}
